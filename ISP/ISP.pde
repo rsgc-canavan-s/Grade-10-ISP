@@ -36,7 +36,6 @@ void draw() {
   if (fired == true) {
     bullet.update();
   }
-  
 
 
   if (right)FWAM = FWAM + 1;
@@ -46,13 +45,13 @@ void draw() {
     FWAMD +=  50;
     FWAM = + 500;
     right = false;
-  } else if (FWAM + 500 < 500)
-  {
+  } else if (FWAM + 500 < 500) {
     FWAMD +=  50;
     FWAM = + 100;
     right = true;
   }
 }
+
 
 
 //enables the ship to move
@@ -64,12 +63,14 @@ void keyPressed() {
     } else if (keyCode == RIGHT) {
       //this addition makes the spaceship move left
       spaceShipX += 10;
-      if (key == CODED) {
-        if (keyCode == ' ') {
-          fired = true;
-          bullet = new Bullet(spaceShipX, spaceShipY, 2, 2);
-        }
-      }
+    }
+  } else {
+    if (key == ' ')
+    {
+      fired = true;
+      bullet = new Bullet(spaceShipX + 500, spaceShipY + 600, 2, 2); 
+
+      //println("k");
     }
   }
 }
