@@ -3,6 +3,10 @@ int spaceShipX = 0;
 int spaceShipY = 0;
 int FWAM = 1;
 int FWAMD = 1;
+int bulletX = spaceShipX + 498;
+int bulletY = spaceShipY + 590;
+int currentBullet = 0;
+Bullet bullets[] = new Bullet[5];
 //this boolean makes it possible for my First_Wave_Alien to move right as long as I make the "right = true"
 boolean right = true;
 //this must be up here becasue this is an area where this is accessible anywhere in a code
@@ -13,6 +17,7 @@ First_Wave_Alien FWA2;
 First_Wave_Alien FWA3;
 Bullet bullet;
 boolean fired = false;
+boolean alive = true;
 
 void setup() {
 
@@ -24,19 +29,24 @@ void setup() {
   FWA = new First_Wave_Alien();
   FWA2 = new First_Wave_Alien();
   FWA3 = new First_Wave_Alien();
+  //initialising all of the instances of the Bullet class
+  for (int counter = 0; counter < bullet.length; counter += 1) {
+    
 }
 
 void draw() {
   background(170);
   ship.drawAt(spaceShipX, spaceShipY);
   fill(255);
-  FWA.drawAt(FWAM + 100, FWAMD + 100);
+  FWA.drawAt(FWAM + 100, FWAMD + 100);{
+  }
   FWA2.drawAt(FWAM + 200, FWAMD + 100);
   FWA3.drawAt(FWAM + 300, FWAMD + 100);
-  if (fired == true) {
-    bullet.update();
-  }
 
+
+if ((spaceShipY + 590) < FWAMD + 70 && (spaceShipX + 498) < FWAM + 70 && (spaceShipX + 498) > FWAM) { 
+ boolean alive = false;
+}
 
   if (right)FWAM = FWAM + 1;
   else FWAM = FWAM - 1;
@@ -52,8 +62,6 @@ void draw() {
   }
 }
 
-
-
 //enables the ship to move
 void keyPressed() {
   if (key == CODED) {
@@ -67,10 +75,9 @@ void keyPressed() {
   } else {
     if (key == ' ')
     {
+     bullets += 1;
       fired = true;
-      bullet = new Bullet(spaceShipX + 500, spaceShipY + 600, 2, 2); 
-
-      //println("k");
+      bullet[bullets] = new Bullet(spaceShipX + 498, spaceShipY + 590, 1, 1); 
     }
   }
 }
