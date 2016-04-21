@@ -6,7 +6,7 @@ int FWAMD = 1;
 int bulletX = spaceShipX + 498;
 int bulletY = spaceShipY + 590;
 int currentBullet = 0;
-Bullet bullets[] = new Bullet[5];
+Bullet bullets[] = new Bullet[50];
 //this boolean makes it possible for my First_Wave_Alien to move right as long as I make the "right = true"
 boolean right = true;
 //this must be up here becasue this is an area where this is accessible anywhere in a code
@@ -30,23 +30,29 @@ void setup() {
   FWA2 = new First_Wave_Alien();
   FWA3 = new First_Wave_Alien();
   //initialising all of the instances of the Bullet class
-  for (int counter = 0; counter < bullet.length; counter += 1) {
-    
+  for (int counter = 0; counter < bullets.length; counter += 1) {
+    bullets[counter] = new Bullet(-50, -50, 2, 2);
+  }
 }
 
 void draw() {
   background(170);
   ship.drawAt(spaceShipX, spaceShipY);
   fill(255);
-  FWA.drawAt(FWAM + 100, FWAMD + 100);{
+  FWA.drawAt(FWAM + 100, FWAMD + 100);
+  {
   }
   FWA2.drawAt(FWAM + 200, FWAMD + 100);
   FWA3.drawAt(FWAM + 300, FWAMD + 100);
+  
+  for (int counter = 0; counter < bullets.length; counter += 1) {
+    //this is where I am drawing the bullets
+    bullets[counter].update();
+  }
 
-
-if ((spaceShipY + 590) < FWAMD + 70 && (spaceShipX + 498) < FWAM + 70 && (spaceShipX + 498) > FWAM) { 
- boolean alive = false;
-}
+  if ((spaceShipY + 590) < FWAMD + 70 && (spaceShipX + 498) < FWAM + 70 && (spaceShipX + 498) > FWAM) { 
+    boolean alive = false;
+  }
 
   if (right)FWAM = FWAM + 1;
   else FWAM = FWAM - 1;
@@ -75,9 +81,15 @@ void keyPressed() {
   } else {
     if (key == ' ')
     {
-     bullets += 1;
+      //this adds one to the bullet counter
+      currentBullet += 1;
+      //so i am able to re-use bullets, i have to reset the number back to zero with this if statement
+      if (currentBullet > bullets.length - 1){
+        currentBullet = 0;
+      }
+
       fired = true;
-      bullet[bullets] = new Bullet(spaceShipX + 498, spaceShipY + 590, 1, 1); 
+      bullets[currentBullet].makeActive(spaceShipX + 498, spaceShipY + 590);
     }
   }
 }

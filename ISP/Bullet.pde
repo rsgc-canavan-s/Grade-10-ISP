@@ -21,7 +21,9 @@ class Bullet {
     }
   }
   //purpose of this method is to make this bullet active
-  void makeActive() {
+  void makeActive(int _x, int _y) {
+    x = _x;
+    y = _y;
     isActive = true;
   }
 }
