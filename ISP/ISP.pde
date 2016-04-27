@@ -4,9 +4,9 @@ int spaceShipY = 0;
 int FWAM = 1;
 int FWAMD = 1;
 int bulletX = spaceShipX + 498;
-int bulletY = spaceShipY + 590;
+int bulletY = spaceShipY + 620;
 int currentBullet = 0;
-Bullet bullets[] = new Bullet[50];
+Bullet bullets[] = new Bullet[1];
 //this boolean makes it possible for my First_Wave_Alien to move right as long as I make the "right = true"
 boolean right = true;
 //this must be up here becasue this is an area where this is accessible anywhere in a code
@@ -40,22 +40,20 @@ void draw() {
   ship.drawAt(spaceShipX, spaceShipY);
   fill(255);
   FWA.drawAt(FWAM + 100, FWAMD + 100);
-  {
-  }
   FWA2.drawAt(FWAM + 200, FWAMD + 100);
   FWA3.drawAt(FWAM + 300, FWAMD + 100);
   
   for (int counter = 0; counter < bullets.length; counter += 1) {
     //this is where I am drawing the bullets
-    bullets[counter].update();
+    bullets[counter].update(FWA);
   }
 
-  if ((spaceShipY + 590) < FWAMD + 70 && (spaceShipX + 498) < FWAM + 70 && (spaceShipX + 498) > FWAM) { 
-    boolean alive = false;
+  if (bulletY < FWAMD + 100 && bulletX < FWAM + 170 && bulletX > FWAM) { 
+    alive = false;
+    println("faggot");
   }
-
-  if (right)FWAM = FWAM + 1;
-  else FWAM = FWAM - 1;
+  //if (right)FWAM = FWAM + 1;
+  //else FWAM = FWAM - 1;
 
   if (FWAM + 500 > width) {
     FWAMD +=  50;

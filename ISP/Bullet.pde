@@ -12,9 +12,10 @@ class Bullet {
     isActive = false;
   }
   //update is used to draw the bullet
-  void update() {
+  void update(First_Wave_Alien alien) {
     if (isActive == true) {
-
+println(alien.getX(), alien.getY());
+//println(alien.getY());
       fill(255, 0, 0);
       y = y - 2;
       rect(x + (a), y + (b), 3 * a, 10 * b);
