@@ -3,12 +3,13 @@ int spaceShipX = 0;
 int spaceShipY = 0;
 int FWAM = 1;
 int FWAMD = 1;
-int bulletX = spaceShipX + 498;
-int bulletY = spaceShipY - 1;
+float bulletX = spaceShipX + 498;
+float bulletY = spaceShipY - 1;
 int currentBullet = 0;
-Bullet bullets[] = new Bullet[1];
+Bullet bullets[] = new Bullet[2];
 //this boolean makes it possible for my First_Wave_Alien to move right as long as I make the "right = true"
 boolean right = true;
+boolean hit = false;
 //this must be up here becasue this is an area where this is accessible anywhere in a code
 Spaceship ship;
 
@@ -17,6 +18,8 @@ First_Wave_Alien FWA2;
 First_Wave_Alien FWA3;
 Bullet bullet;
 boolean fired = false;
+
+
 
 void setup() {
 
@@ -46,13 +49,7 @@ void draw() {
     //this is where I am drawing the bullets
     bullets[counter].update(FWA);
   }
-
-    println("faggot");
-  if (bulletY < FWAMD + 100 && bulletX < FWAM + 170 && bulletX > FWAM) {
-    println ("hit");
-    fill(170);
-
-  }
+//code for the alien's movement
   if (right)FWAM = FWAM + 1;
   else FWAM = FWAM - 1;
 
@@ -74,7 +71,7 @@ void keyPressed() {
       //this subtaction makes the spaceship move left
       spaceShipX -= 10;
     } else if (keyCode == RIGHT) {
-      //this addition makes the spaceship move left
+      //this addition makes the spaceship move right
       spaceShipX += 10;
     }
   } else {
