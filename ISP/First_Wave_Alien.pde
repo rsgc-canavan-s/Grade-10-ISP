@@ -52,7 +52,7 @@ class First_Wave_Alien {
     return x;
   }
   int getY() {
-    return Y;
+    return y;
   }
   
   void makeInactive() {

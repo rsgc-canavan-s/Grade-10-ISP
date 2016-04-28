@@ -1,6 +1,6 @@
 class Bullet {
   int x;
-  float y;
+  int y;
   float a;
   float b;
   boolean isActive;
@@ -19,7 +19,7 @@ class Bullet {
       println(alien.getY());
 
       // detect hit with alien
-      if (y < alien.getY() + 100 && x < alien.getX() + 170 && x > alien.getX()) {
+      if (y < alien.getY() + 100 && x < alien.getX() + 70 && x > alien.getX()) {
         println ("hit");
         isActive = false;
         alien.makeInactive();
@@ -39,7 +39,7 @@ class Bullet {
     isActive = true;
   }
 }
-
+//gathering the x and y coordiantes of the First_Wave_Alien
 int getX() { 
   return X;
 }
