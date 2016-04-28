@@ -4,7 +4,7 @@ int spaceShipY = 0;
 int FWAM = 1;
 int FWAMD = 1;
 int bulletX = spaceShipX + 498;
-int bulletY = spaceShipY + 620;
+int bulletY = spaceShipY - 1;
 int currentBullet = 0;
 Bullet bullets[] = new Bullet[1];
 //this boolean makes it possible for my First_Wave_Alien to move right as long as I make the "right = true"
@@ -17,7 +17,6 @@ First_Wave_Alien FWA2;
 First_Wave_Alien FWA3;
 Bullet bullet;
 boolean fired = false;
-boolean alive = true;
 
 void setup() {
 
@@ -42,18 +41,20 @@ void draw() {
   FWA.drawAt(FWAM + 100, FWAMD + 100);
   FWA2.drawAt(FWAM + 200, FWAMD + 100);
   FWA3.drawAt(FWAM + 300, FWAMD + 100);
-  
+
   for (int counter = 0; counter < bullets.length; counter += 1) {
     //this is where I am drawing the bullets
     bullets[counter].update(FWA);
   }
 
-  if (bulletY < FWAMD + 100 && bulletX < FWAM + 170 && bulletX > FWAM) { 
-    alive = false;
     println("faggot");
+  if (bulletY < FWAMD + 100 && bulletX < FWAM + 170 && bulletX > FWAM) {
+    println ("hit");
+    fill(170);
+
   }
-  //if (right)FWAM = FWAM + 1;
-  //else FWAM = FWAM - 1;
+  if (right)FWAM = FWAM + 1;
+  else FWAM = FWAM - 1;
 
   if (FWAM + 500 > width) {
     FWAMD +=  50;
@@ -82,10 +83,9 @@ void keyPressed() {
       //this adds one to the bullet counter
       currentBullet += 1;
       //so i am able to re-use bullets, i have to reset the number back to zero with this if statement
-      if (currentBullet > bullets.length - 1){
+      if (currentBullet > bullets.length - 1) {
         currentBullet = 0;
       }
-
       fired = true;
       bullets[currentBullet].makeActive(spaceShipX + 498, spaceShipY + 590);
     }
