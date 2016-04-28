@@ -1,11 +1,13 @@
 class First_Wave_Alien {
   int x;
   int y;
+  boolean makeInactive;
   void First_Wave_Alien() {
   }
   void drawAt(int _x, int _y) {
     x = _x;
     y = _y;
+    makeInactive = false;
     beginShape();
     vertex(_x + 20, _y + 20);
     vertex(_x + 40, _y + 20);
@@ -52,4 +54,11 @@ class First_Wave_Alien {
   int getY() {
     return Y;
   }
+  
+  void makeInactive() {
+    makeInactive = true;
+  }
+  
 }
+
+ 
