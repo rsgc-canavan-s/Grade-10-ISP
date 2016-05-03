@@ -1,21 +1,25 @@
 //global
 int spaceShipX = 0;
 int spaceShipY = 0;
-int FWAM = 1;
-int FWAMD = 1;
+int First_Wave_Alien_Move = 1;
+int First_Wave_Alien_Move_Down = 1;
 float bulletX = spaceShipX + 498;
 float bulletY = spaceShipY - 1;
 int currentBullet = 0;
-Bullet bullets[] = new Bullet[2];
+int gameState = 0;
+//creating pace in memory for bullets
+//I can put as may bullets on the screen as I want
+Bullet bullets[] = new Bullet[10];
+
 //this boolean makes it possible for my First_Wave_Alien to move right as long as I make the "right = true"
 boolean right = true;
 boolean hit = false;
 //this must be up here becasue this is an area where this is accessible anywhere in a code
 Spaceship ship;
+//creates space in memory for the aliens
+//this is an array for my aliens, I am now able to draw however many I want
+First_Wave_Alien FWA[] = new First_Wave_Alien[5];
 
-First_Wave_Alien FWA;
-First_Wave_Alien FWA2;
-First_Wave_Alien FWA3;
 Bullet bullet;
 boolean fired = false;
 
@@ -25,44 +29,67 @@ void setup() {
 
   //creating canvas
   size(1000, 700);
-
+  background(0);
   // create the spaceship object
   ship = new Spaceship();
-  FWA = new First_Wave_Alien();
-  FWA2 = new First_Wave_Alien();
-  FWA3 = new First_Wave_Alien();
+  //this is where I create the alien
+  for (int counter = 0; counter <FWA.length; counter += 1) {
+    FWA[counter] = new First_Wave_Alien();
+  }
+
   //initialising all of the instances of the Bullet class
   for (int counter = 0; counter < bullets.length; counter += 1) {
     bullets[counter] = new Bullet(-50, -50, 2, 2);
   }
 }
-
 void draw() {
-  background(170);
-  ship.drawAt(spaceShipX, spaceShipY);
-  fill(255);
-  FWA.drawAt(FWAM + 100, FWAMD + 100);
-  FWA2.drawAt(FWAM + 200, FWAMD + 100);
-  FWA3.drawAt(FWAM + 300, FWAMD + 100);
-
-  for (int counter = 0; counter < bullets.length; counter += 1) {
-    //this is where I am drawing the bullets
-    bullets[counter].update(FWA);
+  //gameState is the integer that allows for different stages in the game. Ex. Start screen, game play, game over, etc.
+  if (gameState == 0) {
+    background(0);
+    //start screen
+    fill(255);
+    textSize(30);
+    textAlign(CENTER);
+    text("Press 's' to start protecting the universe", 500, 350);
+    textSize(50);
+    fill(255);
+    text("SPACE INAVDERS", 500, 100);
+    if (keyPressed) {
+      if (key == 's') {
+        gameState ++;
+      }
+    }
   }
-//code for the alien's movement
-  if (right)FWAM = FWAM + 1;
-  else FWAM = FWAM - 1;
 
-  if (FWAM + 500 > width) {
-    FWAMD +=  50;
-    FWAM = + 500;
-    right = false;
-  } else if (FWAM + 500 < 500) {
-    FWAMD +=  50;
-    FWAM = + 100;
-    right = true;
+  if (gameState == 1) {
+    background(0);
+    ship.drawAt(spaceShipX, spaceShipY);
+    fill(255);
+    //drawing however many aliens are stated in the counter
+    for (int counter = 0; counter < FWA.length; counter += 1) {
+      FWA[counter].update((100)*counter + First_Wave_Alien_Move, First_Wave_Alien_Move_Down);
+    }
+    //allows only however many bullets as the counter number
+    for (int counter = 0; counter < bullets.length; counter += 1) {
+      //this is where I am drawing the bullets
+      bullets[counter].update(FWA);
+    }
+    //code for the alien's movement
+    if (right)First_Wave_Alien_Move = First_Wave_Alien_Move + 1;
+    else First_Wave_Alien_Move = First_Wave_Alien_Move - 1;
+
+    if (First_Wave_Alien_Move + 500 > width) {
+      First_Wave_Alien_Move_Down +=  50;
+      First_Wave_Alien_Move = + 500;
+      right = false;
+    } else if (First_Wave_Alien_Move + 500 < 500) {
+      First_Wave_Alien_Move_Down +=  50;
+      right = true;
+    }
   }
 }
+
+
 
 //enables the ship to move
 void keyPressed() {

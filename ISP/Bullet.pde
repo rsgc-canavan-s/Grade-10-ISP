@@ -13,22 +13,42 @@ class Bullet {
   }
 
   //update is used to draw the bullet
-  void update(First_Wave_Alien alien) {
+  //also used to detect a hit on all aliens
+  void update(First_Wave_Alien alien[]) {
     if (isActive == true) {
-      println(alien.getX());
-      println(alien.getY());
+      //this increases the counter by one, it will max out at whatever the counter number is
+      for (int counter = 0; counter < alien.length; counter += 1) {
+        println(alien[counter].getX());
+        println(alien[counter].getY());
 
-      // detect hit with alien
-      if (y < alien.getY() + 100 && x < alien.getX() + 70 && x > alien.getX()) {
-        println ("hit");
+        // detect hit with alien
+        if (y < alien[counter].getY() + 100 && x < alien[counter].getX() + 70 && x > alien[counter].getX()) {
+         //stops the bullet from appearing
+         isActive = false;
+         //makes the alien disappear
+         alien[counter].makeInactive();
+        }
+        //detect hit with second alien
+        if (y < alien[counter].getY() + 70 && x < alien[counter].getX() + 170 && x > alien[counter].getX()) {
+        //stops the bullet from appearing
         isActive = false;
-        alien.makeInactive();
-      }
+        //makes the alien disappear
+        alien[counter].makeInactive();
+        }
+        //detect hit with third alien
+        if (y < alien[counter].getY() + 70 && x < alien[counter].getX() + 270 && x > alien[counter].getX()) {
+        //stops the bullet from appearing
+        isActive = false;
+        //makes the alien disappear
+        alien[counter].makeInactive();
+        }
 
-      //draw the bullet
-      fill(255, 0, 0);
-      y = y - 2;
-      rect(x + (a), y + (b), 3 * a, 10 * b);
+
+        //draw the bullet
+        fill(255, 0, 0);
+        y = y - 2;
+        rect(x + (a), y + (b), 3 * a, 10 * b);
+      }
     }
   }
 

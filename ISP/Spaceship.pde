@@ -3,7 +3,7 @@ class Spaceship {
   }
   void drawAt(int x, int y) {
 
-    fill(0);
+    fill(170);
     beginShape();
     vertex(x + 470, y + 620);
     vertex(x + 490, y + 620);
