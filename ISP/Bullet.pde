@@ -23,25 +23,12 @@ class Bullet {
 
         // detect hit with alien
         if (y < alien[counter].getY() + 100 && x < alien[counter].getX() + 70 && x > alien[counter].getX()) {
-         //stops the bullet from appearing
-         isActive = false;
-         //makes the alien disappear
-         alien[counter].makeInactive();
+          //stops the bullet from appearing
+          isActive = false;
+          //makes the alien disappear
+          alien[counter].makeInactive();
         }
-        //detect hit with second alien
-        if (y < alien[counter].getY() + 70 && x < alien[counter].getX() + 170 && x > alien[counter].getX()) {
-        //stops the bullet from appearing
-        isActive = false;
-        //makes the alien disappear
-        alien[counter].makeInactive();
-        }
-        //detect hit with third alien
-        if (y < alien[counter].getY() + 70 && x < alien[counter].getX() + 270 && x > alien[counter].getX()) {
-        //stops the bullet from appearing
-        isActive = false;
-        //makes the alien disappear
-        alien[counter].makeInactive();
-        }
+
 
 
         //draw the bullet

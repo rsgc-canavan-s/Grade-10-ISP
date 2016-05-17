@@ -7,6 +7,7 @@ float bulletX = spaceShipX + 498;
 float bulletY = spaceShipY - 1;
 int currentBullet = 0;
 int gameState = 0;
+int textPosY = 700;
 //creating pace in memory for bullets
 //I can put as may bullets on the screen as I want
 Bullet bullets[] = new Bullet[10];
@@ -33,7 +34,7 @@ void setup() {
   // create the spaceship object
   ship = new Spaceship();
   //this is where I create the alien
-  for (int counter = 0; counter <FWA.length; counter += 1) {
+  for (int counter = 0; counter < FWA.length; counter += 1) {
     FWA[counter] = new First_Wave_Alien();
   }
 
@@ -50,10 +51,16 @@ void draw() {
     fill(255);
     textSize(30);
     textAlign(CENTER);
-    text("Press 's' to start protecting the universe", 500, 350);
+    text("Press 's' to start protecting the universe", 500, textPosY);
     textSize(50);
     fill(255);
-    text("SPACE INAVDERS", 500, 100);
+    text("SPACE INAVDERS", 500, textPosY - 250);
+    if(textPosY > 350){
+    textPosY -= 3;
+    }
+    else if(textPosY == 350){
+    textPosY = 0;
+    }
     if (keyPressed) {
       if (key == 's') {
         gameState ++;
@@ -75,8 +82,8 @@ void draw() {
       bullets[counter].update(FWA);
     }
     //code for the alien's movement
-    if (right)First_Wave_Alien_Move = First_Wave_Alien_Move + 1;
-    else First_Wave_Alien_Move = First_Wave_Alien_Move - 1;
+    if (right)First_Wave_Alien_Move = First_Wave_Alien_Move + 2;
+    else First_Wave_Alien_Move = First_Wave_Alien_Move - 2;
 
     if (First_Wave_Alien_Move + 500 > width) {
       First_Wave_Alien_Move_Down +=  50;
